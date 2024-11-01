@@ -24,8 +24,8 @@
             display: flex;
         }
         #content {
-            max-height: 80vh; /* 将容器高度设置为页面的80% */
-            overflow-y: auto; /* 启用垂直滚动 */
+            max-height: 80vh;
+            overflow-y: auto;
         }
         #content img {
             max-width: 100%;
@@ -47,7 +47,7 @@
 
     <div id="content">
         <h2>图片内容</h2>
-        <img src="http://2012115188.pool202-site.make.yun300.cn/img/xsd.jpg" alt="Protected Image">
+        <img id="protectedImage" src="http://2012115188.pool202-site.make.yun300.cn/img/xsd.jpg" alt="Protected Image">
     </div>
 
     <script>
@@ -60,6 +60,10 @@
             if (passwordInput === correctPassword) {
                 document.getElementById("passwordForm").classList.remove("active");
                 document.getElementById("content").classList.add("active");
+
+                // 刷新图片的 URL
+                const image = document.getElementById("protectedImage");
+                image.src = "http://2012115188.pool202-site.make.yun300.cn/img/xsd.jpg" + "?t=" + new Date().getTime(); // 添加时间戳来强制刷新
             } else {
                 errorMsg.textContent = "密码错误，请重试。";
             }
@@ -68,3 +72,4 @@
 
 </body>
 </html>
+
