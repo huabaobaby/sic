@@ -14,22 +14,11 @@
             margin: 0;
             background-color: #f0f0f0;
         }
-        #passwordForm, #content {
-            display: none;
+        #passwordForm {
+            display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
-        }
-        #passwordForm.active, #content.active {
-            display: flex;
-        }
-        #content {
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        #content img {
-            max-width: 100%;
-            height: auto;
         }
         .error {
             color: red;
@@ -38,32 +27,24 @@
 </head>
 <body>
 
-    <div id="passwordForm" class="active">
+    <div id="passwordForm">
         <h2>请输入密码</h2>
         <input type="password" id="passwordInput" placeholder="输入密码">
         <button onclick="checkPassword()">确认</button>
         <p id="errorMsg" class="error"></p>
     </div>
 
-    <div id="content">
-        <h2>图片内容</h2>
-        <img id="protectedImage" src="http://2012115188.pool202-site.make.yun300.cn/img/xsd.jpg" alt="Protected Image">
-    </div>
-
     <script>
         const correctPassword = "1"; // 设置正确的密码
+        const redirectUrl = "http://2302245100.p.make.dcloud.portal1.portal.thefastmake.com/"; // 设置跳转的网址
 
         function checkPassword() {
             const passwordInput = document.getElementById("passwordInput").value;
             const errorMsg = document.getElementById("errorMsg");
-            
-            if (passwordInput === correctPassword) {
-                document.getElementById("passwordForm").classList.remove("active");
-                document.getElementById("content").classList.add("active");
 
-                // 刷新图片的 URL
-                const image = document.getElementById("protectedImage");
-                image.src = "http://2012115188.pool202-site.make.yun300.cn/img/xsd.jpg" + "?t=" + new Date().getTime(); // 添加时间戳来强制刷新
+            if (passwordInput === correctPassword) {
+                // 跳转到指定的网址
+                window.location.href = redirectUrl;
             } else {
                 errorMsg.textContent = "密码错误，请重试。";
             }
@@ -72,4 +53,3 @@
 
 </body>
 </html>
-
